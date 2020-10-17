@@ -8,10 +8,10 @@
 #include <string>
 #include <vector>
 
-#if (defined(__ANDROID__)) ||                                                 \
+#if ((defined(__ANDROID__)) ||                                                 \
     (defined(__APPLE__) &&                                                    \
      (TARGET_IPHONE_SIMULATOR || TARGET_OS_SIMULATOR || TARGET_OS_IPHONE)) || \
-    defined(_WIN32) || defined(__EMSCRIPTEN__)
+    defined(_WIN32) || defined(__EMSCRIPTEN__)) || !defined(__GLIBC__)
 // No backtrace on mobile, windows and emscripten platforms.
 #define SUPPORTS_BACKTRACE 0
 #else

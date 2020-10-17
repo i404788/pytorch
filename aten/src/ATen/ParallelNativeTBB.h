@@ -65,14 +65,14 @@ inline scalar_t parallel_reduce(
   result = tbb::parallel_reduce(
     tbb::blocked_range<int64_t>(begin, end, grain_size), ident,
     [&eptr, &err_flag, f, ident]
-        (const tbb::blocked_range<int64_t>& r, scalar_t ident) {
+        (const tbb::blocked_range<int64_t>& r, scalar_t _ident) {
       try {
-        return f(r.begin(), r.end(), ident);
+        return f(r.begin(), r.end(), _ident);
       } catch (...) {
         if (!err_flag.test_and_set()) {
           eptr = std::current_exception();
         }
-        return ident;
+        return _ident;
       }
     },
     sf
