@@ -32,7 +32,7 @@ void start_manager() {
     SYSCHECK_ERR_RETURN_NEG1(close(pipe_ends[0]));
     SYSCHECK_ERR_RETURN_NEG1(dup2(pipe_ends[1], 1)); // Replace stdout
     SYSCHECK_ERR_RETURN_NEG1(close(pipe_ends[1]));
-    execl(manager_executable_path.c_str(), "torch_shm_manager", NULL);
+    execl(manager_executable_path.c_str(), "torch_shm_manager", (void*)NULL);
     exit(1);
   }
   SYSCHECK_ERR_RETURN_NEG1(close(pipe_ends[1]));
